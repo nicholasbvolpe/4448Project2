@@ -1,26 +1,43 @@
 from ZooAnouncer import ZooAnouncer
 from Zookeeper import Zookeeper
+from Animals import *
 import sys
 
 def main():
     # All animals at the zoo
     animals = []
-    """ animals[0] = new Hippo("Henry")
-    animals[1] = new Hippo("Harry")
-    animals[2] = new Elephant("Edward")
-    animals[3] = new Elephant("Elice")
-    animals[4] = new Rhino("Ricky")
-    animals[5] = new Rhino("Rachael")
-    animals[6] = new Tiger("Tim")
-    animals[7] = new Tiger("Tammy")
-    animals[8] = new Lion("Lucas")
-    animals[9] = new Lion("Lucy")
-    animals[10] = new Cat("Carey")
-    animals[11] = new Cat("Coswald")
-    animals[12] = new Wolf("Wendy")
-    animals[13] = new Wolf("Will")
-    animals[14] = new Dog("Dingo")
-    animals[15] = new Dog("Darby") """
+    Henry = Hippo("Henry")
+    animals.append(Henry)
+    Harry = Hippo("Harry")
+    animals.append(Harry)
+    Edward = Elephant("Edward")
+    animals.append(Edward)
+    Elice = Elephant("Elice")
+    animals.append(Elice)
+    Ricky = Rhino("Ricky")
+    animals.append(Ricky)
+    Rachael = Rhino("Rachael")
+    animals.append(Rachael)
+    Tim = Tiger("Tim")
+    animals.append(Tim)
+    Tammy = Tiger("Tammy")
+    animals.append(Tammy)
+    Lucas = Lion("Lucas")
+    animals.append(Lucas)
+    Lucy  = Lion("Lucy")
+    animals.append(Lucy)
+    Carey  = Cat("Carey")
+    animals.append(Carey)
+    Coswald = Cat("Coswald")
+    animals.append(Coswald)
+    Wendy = Wolf("Wendy")
+    animals.append(Wendy)
+    Will = Wolf("Will")
+    animals.append(Will)
+    Dingo = Dog("Dingo")
+    animals.append(Dingo)
+    Darby = Dog("Darby")
+    animals.append(Darby)
 
     Zookeep = Zookeeper()
     zooAnouncer = ZooAnouncer()
@@ -30,30 +47,30 @@ def main():
     Zookeep.wakeAnimals()
     
     for animal in animals:
-        animal.wakeUp()
+        print(animal.name + " is " + animal.wakeUp())
 
     print("")
     
     Zookeep.rollCallAnimals()
     for animal in animals:
-        animal.makeNoise()
+        print(animal.name + " says " + animal.makeNoise())
     
 
     print("")
     
     Zookeep.feedAnimals()
     for animal in animals:
-        animal.eat()
+        print(animal.name + " is eating!")
     
     print("")
     Zookeep.excerciseAnimals()
     for animal in animals:
-        animal.roam()
+        print(animal.name + " " + animal.roam())
     
     print("")
     Zookeep.shutdownZoo()
     for animal in animals:
-        animal.sleep()
+        print(animal.name + " is " + animal.sleep())
     
     print("")
     f = open('./dayatthezoo.out', 'w')
