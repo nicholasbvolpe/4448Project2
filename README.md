@@ -1,5 +1,6 @@
 # 4448Project2
-
-By: Lucas Laughlin, Nick Volpe, Michael G
+# Zoo Assignment
+ 
+By: Lucas Laughlin, Nicholas Volpe, Michael G
 
 made in Python 3.7
