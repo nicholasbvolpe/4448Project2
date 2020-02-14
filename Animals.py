@@ -1,104 +1,112 @@
 import abc
 import random
 
+# Strategy Pattern: initialization
+from EatStrategy import MessilyEatStrategy
+from EatStrategy import DaintilyEatStrategy
+from EatStrategy import FerociouslyEatStrategy
+daintily_eat = DaintilyEatStrategy()
+messily_eat = MessilyEatStrategy()
+ferociously_eat = FerociouslyEatStrategy()
+
 #base level
 class Animal(object):
-    #per the lecture slides
     __metaclass__ = abc.ABCMeta
-    def __init__(self, name):
-        self.name = None;
+    # name and eat strategy passed from subclass constructors
+    def __init__(self, name, eat_strategy):
+        self.name = name
+        self._eat_strategy=eat_strategy
 
     @abc.abstractmethod
-    def wakeUp(self):
-        return "waking up!!"
     def makeNoise(self):
         pass
-    def eat(self):
-        pass
+    @abc.abstractmethod
     def roam(self):
         pass
+    # Strategy Pattern: call passed eat strategy 
+    def eat(self):
+        print(self.name + self._eat_strategy.eat())
+    def wakeUp(self):
+        print(self.name + " woke Up!") 
     def sleep(self):
-        return "going to sleep..." 
+        print(self.name + " is going to sleep...") 
 
 #type/roaming definitions (2nd level)
+# Strategy Pattern: pass eat strategy to super constructor
 class Canine(Animal):
+    def __init__(self,name):
+        super().__init__(name, ferociously_eat)
     def roam(self):
-        return "Canine is roaming!"
+        print(self.name + " is roaming like a canine!")
 class Feline(Animal):
+    def __init__(self,name):
+        super().__init__(name, daintily_eat)
     def roam(self):
-        return "Feline is roaming!"
+        print(self.name + " is roaming like a feline!")
 class Pachyderm(Animal):
+    def __init__(self,name):
+        super().__init__(name, messily_eat)
     def roam(self):
-        return "Pachyderm is roaming!"
+        print(self.name + " is roaming like a pachyderm!")
 
 # individual animal definitions
 #feline
 class Cat(Feline):
     def __init__(self,name):
-        self.name = name
+        self.randomAct = [" is sleeping...", " is roaming", " says MEOW!", daintily_eat.eat(), " is waking up!"]
+        super().__init__(name+" the Cat")
         
-    # random cat actions defined individually
-    def makeNoise(self):
-        randomAction = ["sleeping...", "roaming", "saying MEOW!", "eating fish", "waking up!"]
+    # call randomAction for random responses defines in randomAct
+    def randomAction(self):
         randI = random.randint(0,4)
-        return randomAction[randI] 
+        print(self.name + self.randomAct[randI])
+    def makeNoise(self):
+        self.randomAction() 
     def wakeUp(self):
-        randomAction = ["sleeping...", "roaming", "saying MEOW!", "eating fish", "waking up!"]
-        randI = random.randint(0,4)
-        return randomAction[randI] 
-    def makeNoise(self):
-        randomAction = ["sleeping...", "roaming", "saying MEOW!", "eating fish", "waking up!"]
-        randI = random.randint(0,4)
-        return randomAction[randI] 
+        self.randomAction()
     def eat(self):
-        randomAction = ["sleeping...", "roaming", "saying MEOW!", "eating fish", "waking up!"]
-        randI = random.randint(0,4)
-        return randomAction[randI] 
+        self.randomAction()
     def roam(self):
-        randomAction = ["sleeping...", "roaming", "saying MEOW!", "eating fish", "waking up!"]
-        randI = random.randint(0,4)
-        return randomAction[randI] 
+        self.randomAction() 
     def sleep(self):
-        randomAction = ["sleeping...", "roaming", "saying MEOW!", "eating fish", "waking up!"]
-        randI = random.randint(0,4)
-        return randomAction[randI] 
+        self.randomAction() 
 
 class Tiger(Feline): 
     def __init__(self,name):
-        self.name = name
+        super().__init__(name+" the Tiger")
     def makeNoise(self):
-        return "rawr"
+        print(self.name + " says rawr")
 class Lion(Feline):
     def __init__(self,name):
-        self.name = name
+        super().__init__(name+" the Lion")
     def makeNoise(self):
-        return "Roar"
+        print(self.name + " roars")
 
 #canine
 class Dog(Canine):
     def __init__(self,name):
-        self.name = name
+        super().__init__(name+" the Dog")
     def makeNoise(self):
-        return "Woof"
+        print(self.name + " barks")
 class Wolf(Canine):
     def __init__(self,name):
-        self.name = name
+        super().__init__(name+" the Wolf")
     def makeNoise(self):
-        return "Howl"
+        print(self.name + " howls")
         
 #pachyderm
 class Elephant(Pachyderm):
     def __init__(self,name):
-        self.name = name
+        super().__init__(name+" the Elephant")
     def makeNoise(self):
-        return "AAAAEEEEERRRRRRR"
+        print(self.name + " screams AAAAEEEEERRRRRRR")
 class Rhino(Pachyderm):
     def __init__(self,name):
-        self.name = name
+        super().__init__(name +" the Rhino")
     def makeNoise(self):
-        return "*grunt*"
+        print(self.name + " just grunts")
 class Hippo(Pachyderm):
     def __init__(self,name):
-        self.name = name
+        super().__init__(name +" the Hippo")
     def makeNoise(self):
-        return "HUNGRY!"
+        print(self.name + " says HUNGRY!")

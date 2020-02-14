@@ -3,12 +3,15 @@ class Zookeeper:
         self.name = name
         self.observers= []
     
+    # Observer Pattern: register observers
     def register_observer(self, observer):
         self.observers.append(observer)
-        
+    
+    # Observer Pattern: remove observers
     def remove_observer(self, observer):
         self.observers.remove(observer)
     
+    # Observer Pattern: notify observers 
     def notify_observers(self):
         for observer in self.observers:
             observer.update()

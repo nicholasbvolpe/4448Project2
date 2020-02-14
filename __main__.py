@@ -40,41 +40,46 @@ def main():
     animals.append(Darby)
 
     Zookeep = Zookeeper()
-    zooAnouncer = ZooAnouncer()
-    Zookeep.register_observer(zooAnouncer)
+    # Observer pattern: pass ZooAnouncer the observable object
+    zooAnouncer = ZooAnouncer(Zookeep)
+
+    # redirect output to file
     orig_stdout = sys.stdout
+    f = open('./dayatthezoo.out', 'w')
+    sys.stdout = f
     
     Zookeep.wakeAnimals()
-    
     for animal in animals:
-        print(animal.name + " is " + animal.wakeUp())
+        animal.wakeUp()
 
     print("")
     
     Zookeep.rollCallAnimals()
     for animal in animals:
-        print(animal.name + " says " + animal.makeNoise())
-    
-
+        animal.makeNoise()
     print("")
     
     Zookeep.feedAnimals()
     for animal in animals:
-        print(animal.name + " is eating!")
+        animal.eat()
     
     print("")
     Zookeep.excerciseAnimals()
     for animal in animals:
-        print(animal.name + " " + animal.roam())
+        animal.roam()
     
     print("")
     Zookeep.shutdownZoo()
     for animal in animals:
-        print(animal.name + " is " + animal.sleep())
+        animal.sleep()
+
+    zooAnouncer.deRegister()
+    zooAnouncer.__del__()
     
     print("")
-    f = open('./dayatthezoo.out', 'w')
-    sys.stdout = f
+    # Return output to system out and close output file
+    sys.stdout = orig_stdout
+    f.close
 
 
 if __name__ == "__main__":
