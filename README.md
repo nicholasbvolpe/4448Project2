@@ -1,5 +1,5 @@
 # 4448Project2
-# Zoo Assignment
+Zoo Assignment
  
 By: Lucas Laughlin, Nicholas Volpe, Michael Gilroy
 
